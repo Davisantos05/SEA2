@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#681322">
+  <meta name="description" content="SEA-MCM: portal e gestão dos Jogos Escolares">
+  <title>SEA-MCM | Jogos Escolares</title>
+  <link rel="icon" href="assets/escudo-sea-mcm.jpeg" type="image/jpeg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js" defer></script>
+  <script src="logic.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div id="splash" class="splash" aria-label="Carregando o SEA-MCM" role="status">
+    <div class="splash-panel">
+      <div class="splash-halo"><img src="assets/escudo-sea-mcm.jpeg" alt="Escudo SEA-MCM"></div>
+      <div class="splash-kicker">ETEC MARIA CRISTINA MEDEIROS</div>
+      <h1>SEA-MCM</h1>
+      <p>Uma escola. Muitos talentos. Todos os jogos.</p>
+      <div class="loading-bar"><span></span></div>
+      <small>JOGOS ESCOLARES · TEMPORADA 2026</small>
+    </div>
+  </div>
+
+  <section id="auth" class="auth-screen is-hidden">
+    <div class="auth-showcase">
+      <div class="auth-brand"><img src="assets/escudo-sea-mcm.jpeg" alt="Escudo"><div><b>SEA-MCM</b><small>Jogos Escolares · 2026</small></div></div>
+      <div class="auth-feature"><span class="overline gold-text">SOCIEDADE ESPORTIVA E ACADÊMICA</span><h1>Um só lugar.<br><em>Todos os jogos.</em></h1><p>Organize campeonatos, acompanhe confrontos e descubra os campeões da ETEC Maria Cristina Medeiros.</p><div class="auth-figures"><div><span>☀</span><strong>Jogos de Verão</strong><small>Esportes e competições</small></div><div><span>❄</span><strong>Jogos de Inverno</strong><small>Tabuleiro e eletrônicos</small></div></div></div>
+      <div class="auth-copyright">© 2026 SEA-MCM — versão demonstrativa local</div>
+    </div>
+    <div class="auth-login-area">
+      <div class="login-panel">
+        <img src="assets/escudo-sea-mcm.jpeg" class="login-logo" alt="Escudo do SEA-MCM">
+        <span class="pill tiny">ACESSO AO PORTAL</span>
+        <h2>Entre ou cadastre-se</h2>
+        <p class="muted">Acompanhe os jogos ou acesse a organização.</p>
+        <button type="button" class="provider-button" id="google-login"><span class="google-mark">G</span> Continuar com o Google <span class="right-icon">↗</span></button>
+        <div class="or-separator"><span>OU</span></div>
+        <div id="auth-start">
+          <form id="auth-email-form" class="login-form">
+            <label class="sr-only" for="auth-email">Endereço de e-mail</label>
+            <input id="auth-email" type="email" placeholder="Endereço de e-mail" required autocomplete="email">
+            <button class="auth-primary" type="submit">Continuar <span>→</span></button>
+          </form>
+        </div>
+        <div id="auth-password-step" class="is-hidden">
+          <button type="button" class="auth-back" data-action="auth-back">← Alterar e-mail</button>
+          <p id="auth-identity" class="muted identity"></p>
+          <form id="auth-password-form" class="login-form">
+            <input id="auth-password" type="password" placeholder="Sua senha" autocomplete="current-password" required>
+            <button class="auth-primary" type="submit">Entrar <span>→</span></button>
+          </form>
+          <div id="admin-demo-note" class="mini-help is-hidden">Conta de teste do organizador: senha <b>SEA2026!</b>. Não é a senha do Google.</div>
+        </div>
+        <div id="auth-signup-step" class="is-hidden">
+          <button type="button" class="auth-back" data-action="auth-back">← Alterar e-mail</button>
+          <form id="auth-signup-form" class="login-form">
+            <input id="auth-new-name" placeholder="Seu nome" required maxlength="65">
+            <input id="auth-new-password" type="password" placeholder="Crie uma senha de teste (8+ caracteres)" minlength="8" required>
+            <button class="auth-primary" type="submit">Criar conta de visitante <span>→</span></button>
+          </form>
+          <p class="mini-help">Use apenas uma senha inventada para o protótipo.</p>
+        </div>
+        <div id="auth-error" class="auth-error is-hidden" role="status"></div>
+        <button type="button" class="guest-link" id="guest-login">Continuar como visitante <span>↗</span></button>
+        <p class="login-foot">Área pública sem cadastro • Login local de demonstração</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="app" class="app is-hidden">
+    <header class="app-header">
+      <div class="header-inner">
+        <button type="button" class="brand-button" data-page="inicio"><img src="assets/escudo-sea-mcm.jpeg" alt="Escudo SEA-MCM"><span><b>SEA-MCM</b><small>Jogos Escolares</small></span></button>
+        <nav id="main-nav" class="main-nav" aria-label="Navegação principal">
+          <button data-page="inicio" class="nav-link active"><span>Início</span></button>
+          <button data-page="verao" class="nav-link">☀ <span>Verão</span></button>
+          <button data-page="inverno" class="nav-link">❄ <span>Inverno</span></button>
+          <button data-page="partidas" class="nav-link">▣ <span>Partidas</span></button>
+          <button data-page="classificacao" class="nav-link">▤ <span>Classificação</span></button>
+          <button data-page="estatisticas" class="nav-link">◫ <span>Estatísticas</span></button>
+          <button data-page="equipes" class="nav-link">♙ <span>Equipes</span></button>
+          <button data-page="operacao" class="nav-link">◷ <span>Operação</span></button>
+          <button data-page="pesquisa" class="nav-link">⌕ <span>Pesquisa</span></button>
+          <button data-page="administracao" class="nav-link admin-control">⚙ <span>Administração</span></button>
+        </nav>
+        <div class="profile-box"><span class="account-avatar" id="account-avatar">V</span><div><b id="account-name">Visitante</b><small id="account-role">Público</small></div><button type="button" class="header-exit" data-action="logout" title="Sair">↪</button></div>
+      </div>
+    </header>
+    <div class="app-context-bar"><span id="context-label">PORTAL PÚBLICO · TEMPORADA 2026</span><div><span class="demo-indicator">● DADOS LOCAIS</span><button type="button" id="switch-mode" class="mode-button is-hidden" data-action="toggle-mode">Visão pública</button></div></div>
+    <main class="content" id="content" tabindex="-1"></main>
+    <footer class="app-footer">🏆 SEA-MCM — Sociedade Esportiva e Acadêmica · ETEC Maria Cristina Medeiros <span>Protótipo local • Não sincronizado</span></footer>
+  </div>
+
+  <dialog id="comp-dialog" class="form-dialog">
+    <form id="comp-form">
+      <div class="dialog-head"><h2 id="comp-form-title">Novo campeonato</h2><button type="button" class="close" data-close="comp-dialog">×</button></div>
+      <input type="hidden" name="id">
+      <label>Nome do campeonato *<input name="name" maxlength="90" required placeholder="Interclasses 2026"></label>
+      <div class="form-grid"><label>Modalidade *<select name="sport" id="comp-sport" required></select></label><label>Formato *<select name="format"><option value="liga">Pontos corridos</option><option value="mata-mata">Eliminatória</option></select></label></div>
+      <div class="form-grid"><label>Data de início *<input name="date" type="date" required></label><label>Situação<select name="status"><option>Planejado</option><option>Em andamento</option><option>Concluído</option></select></label></div>
+      <div class="dialog-actions"><button type="button" class="btn secondary" data-close="comp-dialog">Cancelar</button><button type="submit" class="btn primary">Salvar campeonato</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="team-dialog" class="form-dialog">
+    <form id="team-form">
+      <div class="dialog-head"><h2 id="team-form-title">Nova equipe</h2><button type="button" class="close" data-close="team-dialog">×</button></div>
+      <input name="id" type="hidden">
+      <label>Nome da equipe *<input name="name" required maxlength="70" placeholder="Ex.: Time Azul"></label>
+      <label>Turma<input name="className" maxlength="50" placeholder="Ex.: 2º A"></label>
+      <label>Capitão<input name="captain" maxlength="70" placeholder="Nome do capitão"></label>
+      <div class="player-heading"><label>Jogadores</label><button type="button" class="btn secondary small" id="add-player">+ Adicionar jogador</button></div>
+      <div id="player-inputs" class="player-inputs"></div>
+      <label>Observações<textarea name="notes" rows="3" maxlength="500" placeholder="Notas adicionais..."></textarea></label>
+      <div class="dialog-actions"><button type="button" class="btn secondary" data-close="team-dialog">Cancelar</button><button type="submit" class="btn primary">Salvar equipe</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="match-dialog" class="form-dialog">
+    <form id="match-form">
+      <div class="dialog-head"><h2 id="match-form-title">Registrar partida</h2><button type="button" class="close" data-close="match-dialog">×</button></div>
+      <input type="hidden" name="id">
+      <div class="form-grid"><label>Equipe A *<select name="teamA" required></select></label><label>Equipe B *<select name="teamB" required></select></label></div>
+      <div class="form-grid"><label>Data<input name="date" type="date"></label><label>Horário<input name="time" type="time"></label></div>
+      <label>Estado da partida<select name="status" id="match-status"><option value="scheduled">Agendada</option><option value="live">Em andamento</option><option value="finished">Finalizada</option></select></label>
+      <div class="form-grid" id="score-grid"><label>Placar A *<input name="scoreA" type="number" min="0" max="999" step="1"></label><label>Placar B *<input name="scoreB" type="number" min="0" max="999" step="1"></label></div>
+      <p class="mini-help">Na eliminatória, empates não são aceitos nesta versão: registre um vencedor após o desempate.</p>
+      <div class="dialog-actions"><button type="button" class="btn secondary" data-close="match-dialog">Cancelar</button><button type="submit" class="btn primary">Salvar partida</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="message-dialog" class="form-dialog small-dialog"><div class="dialog-head"><h2 id="message-title">Informação</h2><button type="button" class="close" data-close="message-dialog">×</button></div><p id="message-text"></p><div class="dialog-actions"><button class="btn primary" data-close="message-dialog" type="button">Entendi</button></div></dialog>
+  <div id="toast" class="toast is-hidden" role="status" aria-live="polite"></div>
+  <!-- Proteção para que nenhum erro de script deixe o splash preso para sempre. -->
+  <script>
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        const splash = document.getElementById('splash');
+        if (splash) { splash.classList.add('is-hidden'); splash.style.display = 'none'; }
+        if (!window.SEA_BOOT_OK) {
+          document.getElementById('auth')?.classList.remove('is-hidden');
+          const msg = document.getElementById('auth-error');
+          if(msg) {msg.textContent = 'Não foi possível iniciar todas as funções. Verifique os arquivos e atualize a página.'; msg.classList.remove('is-hidden');}
+        }
+      }, 2800);
+    });
+  </script>
+</body>
+</html>
